@@ -11,9 +11,9 @@ S využitím emperické kvantově chemické metody PB3 implementované v program
 
 Pro toto cvičení jsem si zvolil Diels-Alderovu reakci z článku [[1]]. Diels-Alderovy rekce patří mezi cykloadice. Reagují spolu dien (1) a dienofil (2). Dochází ke vzniku dvou vazeb mezi uhlíky a vzniku šestičlenného uhlíkového cyklu. [[2]]
 
-F1.large.jpg
+<img src="http://jirkadanek.github.com/QM/F1.large.jpg" width="100%">
 
-Pro účely tohoto cvičení jsem zjednodušil molekulu dienu, a to tak, že jsem nahradil methylem. Odpovídajícím způsobem pak byla modifikována i molekula produktu (4). Smyslem této změny je snížení časové náročnosti výpočtů a zpřehlednění manualní práce.
+Pro účely tohoto cvičení jsem zjednodušil molekulu dienu, a to tak, že jsem nahradil methylem. Odpovídajícím způsobem pak byla modifikována i molekula produktu (4). Smyslem této změny je snížit časovou náročnost výpočtů a zpřehlednit manualní práci s molekulovými daty.
 
 [1]: http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3241958/ "Computational design of an enzyme catalyst for a stereoselective bimolecular Diels-Alder reaction"
 [2]: http://www.scribd.com/doc/57131646/42/Diels-Alderova-reakce
@@ -30,15 +30,19 @@ module add avogadro
 
 ### VMD
 
+    module add vmd
+
+Program VMD jsem použil pro analýzu trajektorií z optimalizací molekul v kroku 02.
+
 ### extract-\*\*\*-\*\*\*
 
-module add qmutil
+    module add qmutil
 
 Sada skriptů pro extrahování údajů z logů programu Gaussian
 
 ### Gaussian 03
 
-module add gaussian:03_E1
+    module add gaussian:03_E1
 
 Gaussian je program pro výpočty v kvantové chemii. První verze, Gaussian 70, vyšla v roce 1970, v současnosti je aktualní verze Gaussian 09 z roku 2009.
 
@@ -46,7 +50,7 @@ Spouští se příkazem g03
 
 ### Molekel
 
-module add molekel
+    module add molekel
 
 Program Molekel byl použit pro vizualizaci vibrací.
 
@@ -56,7 +60,7 @@ Program Molekel byl použit pro vizualizaci vibrací.
 
 Molekuly výchozích látek a molekulu produktu jsem namodeloval v programu Avogadro. Následně jsem v programu provedl optimalizaci každé z molekul pomocí silového pole MMFF94. Cílem tohoto kroku je urychlit následnou kvantově mechanickou optimalizaci. Molekuly zoptimalizované v programu Avogadro jsem uložil ve formátu xyz do složky "QM/01\_Molekuly"
 
-Molekuly jsem dále optimalizoval v programu Gaussian 03 pomocí metody PM3. Výsledky optimalizace se nacházejí ve složce "QM/02\_QM_optimalizace" Pro ověření, že se molekuly nacházejí v lokálním minimu jsem provedl analýzu vibrací. Výsledky z analýzy vybrací jsou ve složce "QM/03\_F\_analyza"
+Molekuly jsem dále optimalizoval v programu Gaussian 03 pomocí metody PM3. Výsledky optimalizace se nacházejí ve složce "QM/02\_QM_optimalizace" Pro ověření, že se molekuly nacházejí v lokálním minimu jsem provedl analýzu vibrací. Výsledky z analýzy vibrací jsou ve složce "QM/03\_F\_analyza"
 
 Z vypočtených energií molekul jsem stanovil reakční energii reakce.
 
@@ -167,16 +171,19 @@ Průběh změn energie během drivingu je vhodné vykreslit v grafu.
 
     QM/04_Transitni_stav/produkt $ ../graph.bash
 
-produkt.png
+<img src="http://jirkadanek.github.com/QM/04_Transitni_stav/produkt/produkt.png" width="100%">
+
 
 Použití snímku 43 z tohoto drivingu nevede, jak bylo zjištěno po optimalizaci a vizualizaci vibrací, k dobrému tranzitnímu stavu.
 
 
 ### 04b Hledání transitního stavu
 
-Z prvního drivingu jsem vybral snímek 21, zafixoval vzdálenost atomů (4,15) a nechal prodlužovat vazbu mezi atomy (1,13).
+Z prvního drivingu jsem vibral snímek 21, zafixoval vzdálenost atomů (4,15) a nechal prodlužovat vazbu mezi atomy (1,13). Výpočet proběhl ve složce "QM/04\_Transitni\_stav/produkt\_step1"
 
-produkt_step1.png
+<img src="http://jirkadanek.github.com/QM/04_Transitni_stav/produkt_step1/produkt_step1.png" width="100%">
+
+Jako vstup pro optimalizaci TS jsem zvolil snímek číslo 9.
 
 ### 05b Optimalizace TS
 Takto nalezený tranzitní stav jsem dále zoptimalizoval a zobrazil si imaginární vibraci v programu Molekel.
@@ -211,7 +218,7 @@ V této jediné imaginární vibraci je vidět vibrace atomů 4,15 a 1,13 proti 
 
 ## Závěr
 
-Reakce je exotermická.
+Reakce je exotermická. Analýzou vibrací tranzitního stavu jsem určil, že reakce je synchronní. To odpovídá mechanizmu reakce popsaném v původním článku.
 
 ## Další použité zdroje
  - slajdy C7800-QM-Gaussian_001.pdf wolf.ncbr.muni.cz/home/kulhanek/C7800-QM-Gaussian_001.pdf
